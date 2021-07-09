@@ -1,0 +1,40 @@
+(printf "Ingresar el numero de registros que desea: ")
+(define n (- (read) 1))
+
+(define VECTOR (make-vector (+ n 1)))
+(define-struct Persona (Nombre Teléfono Edad Salario))
+
+
+(define (IngresarDatos inf n)
+   (displayln "Ingresar nombre")
+   (define a (read))
+  (displayln "Ingresar telefono")
+   (define b (read))
+  (displayln "Ingresar edad")
+   (define c (read))
+  (displayln "Ingresar salario")
+   (define d (read))
+  (if (<= inf n)
+      (begin
+        (vector-set! VECTOR inf (make-Persona a b c d))
+        (IngresarDatos (+ inf 1)n)
+       )
+   )
+  )
+
+
+(define (ConsultarDatos inf n j)
+  (if (<= inf n)
+      (begin
+        (display "Persona ")    (display (+ inf 1)) (newline)
+        (display "Nombre: ")    (display (Persona-Nombre(vector-ref VECTOR inf ))) (newline)
+        (display "Telefono: ") (display (Persona-Teléfono(vector-ref VECTOR inf )))(newline)
+        (display "Edad: ")  (display (Persona-Edad(vector-ref VECTOR inf )))(newline)
+        (display "Salario: ")  (display (Persona-Salario(vector-ref VECTOR inf )))(newline)(newline)
+        (ConsultarDatos (+ inf 1)n(+ j(Persona-Edad(vector-ref VECTOR inf )))))
+(displayln j)
+      )
+      )
+
+(IngresarDatos 0 n)
+(ConsultarDatos 0 n 0)
