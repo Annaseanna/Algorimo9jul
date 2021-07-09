@@ -1,11 +1,12 @@
 (printf "Ingresar el numero de registros que desea: ")
-(define n (- (read) 1))
+(define n (read))
 
 (define VECTOR (make-vector (+ n 1)))
 (define-struct Persona (Nombre Teléfono Edad Salario))
 
 
 (define (IngresarDatos inf n)
+  (cond ((< inf n)
    (displayln "Ingresar nombre")
    (define a (read))
   (displayln "Ingresar telefono")
@@ -14,30 +15,37 @@
    (define c (read))
   (displayln "Ingresar salario")
    (define d (read))
-  (if (<= inf n)
+  (if (< inf n)
       (begin
         (vector-set! VECTOR inf (make-Persona a b c d))
         (IngresarDatos (+ inf 1)n)
        )
    )
-  )
+  )))
 
 
-(define (ConsultarDatos inf n j)
-  (if (<= inf n)
+(define (ConsultarDatos inf n j l)
+  (if (< inf n)
       (begin
         (display "Persona ")    (display (+ inf 1)) (newline)
         (display "Nombre: ")    (display (Persona-Nombre(vector-ref VECTOR inf ))) (newline)
         (display "Telefono: ") (display (Persona-Teléfono(vector-ref VECTOR inf )))(newline)
         (display "Edad: ")  (display (Persona-Edad(vector-ref VECTOR inf )))(newline)
         (display "Salario: ")  (display (Persona-Salario(vector-ref VECTOR inf )))(newline)(newline)
-        (ConsultarDatos (+ inf 1)n(+ j(Persona-Edad(vector-ref VECTOR inf )))))
+        (ConsultarDatos (+ inf 1)n(+ j(Persona-Edad(vector-ref VECTOR inf)))(min l (Persona-Edad(vector-ref VECTOR inf )))))
       (begin
         (displayln "El suma de las edades es: ")
         (display j)
       (displayln "\nEl promedio de la edad de los empleados es: ")
-      (display (/ j inf)))
-      )) 
+      (display (/ j inf))
+      (displayln "\nEl menor de los datos")
+      (display l)
+      )))
+;(define (menor inf n j)
+;  (if (< inf n)
+;      (begin
+;      (define men (Persona-edad(vector-ref VECTOR inf)))
+;      (menor (+ inf 1)n(min men j)))))
 
 (IngresarDatos 0 n)
-(ConsultarDatos 0 n 0)
+(ConsultarDatos 0 n 0 200)
