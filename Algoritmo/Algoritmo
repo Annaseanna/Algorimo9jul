@@ -1,3 +1,4 @@
+
 (printf "Ingresar el numero de registros que desea: ")
 (define n (read))
 
@@ -36,16 +37,20 @@
       (begin
         (displayln "El suma de las edades es: ")
         (display j)
-      (displayln "\nEl promedio de la edad de los empleados es: ")
-      (display (/ j inf))
-      (displayln "\nEl menor de los datos")
-      (display l)
-      )))
-;(define (menor inf n j)
-;  (if (< inf n)
-;      (begin
-;      (define men (Persona-edad(vector-ref VECTOR inf)))
-;      (menor (+ inf 1)n(min men j)))))
+        (displayln "\nEl promedio de la edad de los empleados es: ")
+        (display (/ j inf))
+        (displayln "\nEl menor de los datos")
+        (display l)
+        (display (BuscarTelefono l inf n)))))
+
+(define (BuscarTelefono l inf n)  
+  (if (< inf n)
+      (if (string=? l (Persona-Edad (vector-ref VECTOR inf )))
+        (begin
+        (display "Nombre: ")
+        (display (Persona-Nombre(vector-ref VECTOR inf ))))
+        (BuscarTelefono l (+ inf 1) n))))
+  
 
 (IngresarDatos 0 n)
 (ConsultarDatos 0 n 0 200)
