@@ -32,9 +32,12 @@
         (display "Edad: ")  (display (Persona-Edad(vector-ref VECTOR inf )))(newline)
         (display "Salario: ")  (display (Persona-Salario(vector-ref VECTOR inf )))(newline)(newline)
         (ConsultarDatos (+ inf 1)n(+ j(Persona-Edad(vector-ref VECTOR inf )))))
-(displayln j)
-      )
-      )
+      (begin
+        (displayln "El suma de las edades es: ")
+        (display j)
+      (displayln "\nEl promedio de la edad de los empleados es: ")
+      (display (/ j inf)))
+      )) 
 
 (IngresarDatos 0 n)
 (ConsultarDatos 0 n 0)
